@@ -784,6 +784,14 @@ static void get_sha_impl(struct strbuf *buf)
 	strbuf_addstr(buf, "SHA-1: Collision Detection\n");
 #endif
 
+#if defined(SHA1_OPENSSL_UNSAFE)
+	strbuf_addstr(buf, "unsafe-SHA-1: OpenSSL\n");
+#elif defined(SHA1_BLK_UNSAFE)
+	strbuf_addstr(buf, "unsafe-SHA-1: blk\n");
+#elif defined(SHA1_APPLE_UNSAFE)
+	strbuf_addstr(buf, "unsafe-SHA-1: Apple CommonCrypto\n");
+#endif
+
 #if defined(SHA256_OPENSSL)
 	strbuf_addstr(buf, "SHA-256: OpenSSL\n");
 #elif defined(SHA256_NETTLE)
